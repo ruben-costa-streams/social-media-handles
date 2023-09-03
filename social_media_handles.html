@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Carousel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(180deg, #f0f0f0, #dcdcdc); /* Smooth background gradient */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            overflow: hidden;
+            white-space: nowrap;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .carousel {
+            display: inline-block;
+            text-align: center;
+            margin-right: 20px; /* Adjust the margin to add spacing between columns */
+            vertical-align: top;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+
+        .icon {
+            font-size: 40px;
+            margin-bottom: 5px;
+        }
+
+        .visible {
+            opacity: 1;
+        }
+
+        /* Light mode styles */
+        .light-mode .container {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .light-mode .github-link {
+            color: #333;
+        }
+
+        /* Dark mode styles */
+        .dark-mode {
+            background: linear-gradient(180deg, #333, #111); /* Dark background gradient */
+            color: #fff;
+        }
+
+        .dark-mode .container {
+            background-color: rgba(0, 0, 0, 0.9); /* Dark mode container background */
+        }
+
+        .dark-mode .github-link {
+            color: #fff; /* Dark mode link color */
+        }
+
+        /* GitHub link */
+        .github-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .github-link:hover {
+            color: #4183C4; /* GitHub link hover color */
+        }
+
+        /* Dark mode toggle */
+        .dark-mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 60px; /* Increased spacing */
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .dark-mode-toggle:hover {
+            color: #4183C4; /* Toggle button hover color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="carousel instagram">
+            <i class="icon fab fa-instagram"></i>
+            <p>@__ruben.costa__</p>
+        </div>
+        <div class="carousel twitch">
+            <i class="icon fab fa-twitch"></i>
+            <p>@RubenKindaCodes</p>
+        </div>
+        <div class="carousel github">
+            <i class="icon fab fa-github"></i>
+            <p>@rubencosta13</p>
+        </div>
+        <div class="carousel discord">
+            <i class="icon fab fa-discord"></i>
+            <p>@YourDiscordHandle</p>
+        </div>
+    </div>
+
+    <!-- GitHub link -->
+    <a class="github-link" href="https://github.com/yourusername/your-repo" target="_blank">GitHub Repository</a>
+
+    <!-- Dark mode toggle -->
+
+    <!-- Include Font Awesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+
+    <script>
+        const carouselItems = document.querySelectorAll('.carousel');
+        let currentIndex = 0;
+        let darkMode = false;
+
+        function showItem(index) {
+            carouselItems.forEach((item, i) => {
+                if (i === index) {
+                    item.classList.add('visible');
+                } else {
+                    item.classList.remove('visible');
+                }
+            });
+        }
+
+        function nextItem() {
+            currentIndex = (currentIndex + 1) % carouselItems.length;
+            showItem(currentIndex);
+        }
+
+        // Automatically transition to the next item every 3 seconds (adjust as needed)
+        setInterval(nextItem, 3000);
+
+        // Show the initial item
+        showItem(currentIndex);
+
+        // Dark mode toggle functionality
+
+        // Check query parameter for initial theme state
+        const urlParams = new URLSearchParams(window.location.search);
+        const darkParam = urlParams.get('dark');
+
+        if (darkParam === 'true') {
+            darkMode = true;
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>
